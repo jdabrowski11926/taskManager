@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/item_statistics"
+        android:title="Statistics"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/item_change_password"
+        android:title="Change password"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/item_log_out"
+        android:title="Log out"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/item_sort"
+        android:title="Sort tasks"
+        app:showAsAction="never">
+
+        <menu xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <item android:id="@+id/item_sort_name_asc"
+                android:title="Sort by name (+)"
+                app:showAsAction="never"/>
+
+            <item android:id="@+id/item_sort_name_desc"
+                android:title="Sort by name (-)"
+                app:showAsAction="never"/>
+
+            <item android:id="@+id/item_sort_date_asc"
+                android:title="Sort by date (+)"
+                app:showAsAction="never"/>
+
+            <item android:id="@+id/item_sort_date_desc"
+                android:title="Sort by date (-)"
+                app:showAsAction="never"/>
+
+            <item android:id="@+id/item_sort_category_asc"
+                android:title="Sort by category (+)"
+                app:showAsAction="never"/>
+
+            <item android:id="@+id/item_sort_category_desc"
+                android:title="Sort by category (-)"
+                app:showAsAction="never"/>
+
+            <item android:id="@+id/item_sort_active_asc"
+                android:title="Sort by active (+)"
+                app:showAsAction="never"/>
+
+            <item android:id="@+id/item_sort_active_desc"
+                android:title="Sort by active (-)"
+                app:showAsAction="never"/>
+
+            <item android:id="@+id/item_sort_notification_asc"
+                android:title="Sort by notification (+)"
+                app:showAsAction="never"/>
+
+            <item android:id="@+id/item_sort_notification_desc"
+                android:title="Sort by notification (-)"
+                app:showAsAction="never"/>
+
+        </menu>
+
+    </item>
+
+
+
+
+
+</menu>

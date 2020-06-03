@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/border"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/textViewStartDateTime"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="140dp"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="0dp"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/textViewEndDateTime"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="140dp"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="36dp"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textColor="@android:color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="130dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="32dp"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/textViewCategory"
+            android:layout_width="130dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="55dp"
+            android:textSize="10sp" />
+
+        <Switch
+            android:id="@+id/switchListActive"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="245dp"
+            android:layout_marginLeft="245dp"
+            android:layout_marginTop="0dp"
+            android:text="Active "
+            android:textSize="11sp" />
+
+        <Switch
+            android:id="@+id/switchListNotification"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/switchListActive"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="245dp"
+            android:layout_marginLeft="245dp"
+            android:layout_marginTop="8dp"
+            android:text="Notify "
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/buttonEditTask"
+            android:layout_width="59dp"
+            android:layout_height="67dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:text="EDIT"
+            android:textSize="12sp" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
