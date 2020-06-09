@@ -40,7 +40,7 @@ public class CategoryRequestAndResponse {
     }
 
     public String getUser() {
-        return this.name;
+        return this.user;
     }
 
     public long getId() {

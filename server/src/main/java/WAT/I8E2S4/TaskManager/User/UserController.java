@@ -16,6 +16,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public void signUp(@RequestBody User user){
         System.out.println("SIGN UP");
+        System.out.println("USER INFO - NAME "+user.getUsername()+" PASSWORD "+user.getPassword());
         if(user.getPassword()=="" || user.getUsername()==""){
             throw new UserNoDataException();
         }

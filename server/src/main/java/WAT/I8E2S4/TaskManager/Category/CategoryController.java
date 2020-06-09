@@ -23,6 +23,9 @@ public class CategoryController {
     @ResponseStatus(HttpStatus.CREATED)
     public void addCategory(@RequestBody CategoryRequestAndResponse category, @PathVariable String username){
         System.out.println("ADD CATEGORY");
+        System.out.println("CATEGORY NAME "+category.getName());
+        System.out.println("CATEGORY DESC "+category.getDescription());
+        System.out.println("CATEGORY USER "+category.getUser());
         if(category.getName()=="") throw new CategoryNoDataException();
         User user = userRepository.findByUsername(username).orElseThrow(
                 ()->new UserNotFoundException()

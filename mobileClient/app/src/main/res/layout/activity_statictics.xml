@@ -13,6 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
+        android:background="#66A5DC"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -21,6 +22,7 @@
         android:id="@+id/TableLayoutStatictics"
         android:layout_width="409dp"
         android:layout_height="653dp"
+        android:background="#CBE4EC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,7 +31,7 @@
         <TableRow
             android:id="@+id/staticticsRowNames"
             android:layout_width="match_parent"
-            android:layout_height="80dp" >
+            android:layout_height="80dp">
 
             <TextView
                 android:id="@+id/staticticsCategoryName"
@@ -45,9 +47,9 @@
 
             <TextView
                 android:id="@+id/staticticsCategoryTime"
-                android:text="Time for all tasks"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="Time for all tasks" />
 
         </TableRow>
 

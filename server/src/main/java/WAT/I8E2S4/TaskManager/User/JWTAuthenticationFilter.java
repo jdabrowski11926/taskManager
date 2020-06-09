@@ -32,9 +32,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             HttpServletRequest request,
             HttpServletResponse response) throws AuthenticationException {
         System.out.println("UWIRZYTELNIANIE - funkcja <ATTEMPT>");
-        System.out.println("UWIRZYTELNIANIE - HEADER początkowy : "+request.getHeader(HEADER_STRING));
-        System.out.println("UWIRZYTELNIANIE - REQUEST : "+request.getUserPrincipal());
-        System.out.println("UWIRZYTELNIANIE - RESPONSE : "+response.toString());
+        //System.out.println("UWIRZYTELNIANIE - HEADER początkowy : "+request.getHeader(HEADER_STRING));
+        //System.out.println("UWIRZYTELNIANIE - REQUEST : "+request.getUserPrincipal());
+        //System.out.println("UWIRZYTELNIANIE - RESPONSE : "+response.toString());
         try{
             User creds = new ObjectMapper().readValue(request.getInputStream(), User.class);
             System.out.println("UWIRZYTELNIANIE - CREDS - Username:"+creds.getUsername()+" Password:"+creds.getPassword());
@@ -63,5 +63,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(SECRET.getBytes()));
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+        System.out.println("TOKEN TO "+ token);
     }
 }

@@ -5,6 +5,7 @@
     android:id="@+id/startLayoutId"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CBE4EC"
     tools:context=".ui.StartActivity">
 
     <Button
@@ -12,6 +13,7 @@
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginTop="120dp"
+        android:background="#66A5DC"
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -23,6 +25,7 @@
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginTop="216dp"
+        android:background="#66A5DC"
         android:text="Register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

@@ -34,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="56dp"
+        android:background="#CBE4EC"
         android:clipToPadding="false"
         android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
