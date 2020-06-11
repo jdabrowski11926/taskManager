@@ -31,13 +31,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(
             HttpServletRequest request,
             HttpServletResponse response) throws AuthenticationException {
-        System.out.println("UWIRZYTELNIANIE - funkcja <ATTEMPT>");
-        //System.out.println("UWIRZYTELNIANIE - HEADER początkowy : "+request.getHeader(HEADER_STRING));
-        //System.out.println("UWIRZYTELNIANIE - REQUEST : "+request.getUserPrincipal());
-        //System.out.println("UWIRZYTELNIANIE - RESPONSE : "+response.toString());
         try{
             User creds = new ObjectMapper().readValue(request.getInputStream(), User.class);
-            System.out.println("UWIRZYTELNIANIE - CREDS - Username:"+creds.getUsername()+" Password:"+creds.getPassword());
             if(creds.getUsername()==null){ throw new BadCredentialsException("1000"); }
             if(creds.getPassword()==null){ throw new BadCredentialsException("1000"); }
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -46,7 +41,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                     new ArrayList<>()
             ));
         }catch(IOException e){
-            System.out.println("Błąd!");
             throw new RuntimeException(e);
         }
     }
@@ -57,12 +51,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             HttpServletResponse response,
             FilterChain chain,
             Authentication authResult) throws IOException, ServletException {
-        System.out.println("UWIRZYTELNIANIE - funkcja <SUCCESSFUL>");
         String token = JWT.create()
                 .withSubject(((org.springframework.security.core.userdetails.User) authResult.getPrincipal()).getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(SECRET.getBytes()));
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
-        System.out.println("TOKEN TO "+ token);
     }
 }

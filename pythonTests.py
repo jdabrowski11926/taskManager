@@ -4,7 +4,9 @@ import json
 import http
 from typing import Any, Dict, Optional
 
-url = "http://localhost:8080"
+address = "localhost"
+port = 8080
+url = "http://"+address+":"+str(port)
 
 # LISTA BŁĘDÓW : https://pl.wikipedia.org/wiki/Kod_odpowiedzi_HTTP
 errorList = [[400, 'Bad Request'],[401, 'Unauthorized'],[402,'Payment Required'],
@@ -46,13 +48,13 @@ def testGetUsers():
 def testRegisterUser(username, password):
     print("Testing registering user {http://localhost:8080/sign-up}")
     data = {"username": username,"password": password}
-    response = requests.post("http://localhost:8080/sign-up", json=data)
+    response = requests.post(url+"/sign-up", json=data)
     printResponseInfo(response)
     
 def testLoginUser(username, password):
     print("Testing login user {http://localhost:8080/login}")
     data = {"username": username,"password": password}
-    response = requests.post("http://localhost:8080/login", json=data)
+    response = requests.post(url+"/login", json=data)
     printResponseInfo(response)
     token = response.headers
     return token
@@ -60,7 +62,7 @@ def testLoginUser(username, password):
 def testEditUser(username, oldPassword, newPassword, token):
     print("Testing editing user {http://localhost:8080/user/{username}/edit_account}")
     data = {"oldPassword":oldPassword,"newPassword":newPassword}
-    response = requests.post("http://localhost:8080/user/"+username+"/edit_account", json=data, headers=token)
+    response = requests.post(url+"/user/"+username+"/edit_account", json=data, headers=token)
     printResponseInfo(response)
     
 def testAddCategory(username, name, description, token):
@@ -71,18 +73,18 @@ def testAddCategory(username, name, description, token):
     
 def testGetCategories(username, token):
     print("Testing getting all categories {http://localhost:8080/user/{username}/category}")
-    response = requests.get("http://localhost:8080/user/"+username+"/category", headers=token)
+    response = requests.get(url+"/user/"+username+"/category", headers=token)
     printResponseInfo(response)
     
 def testEditCategory(username, categoryOldName, categoryNewName, categoryNewDescription ,token):
     print("Testing editing category {http://localhost:8080/user/{username}/category/{categoryName}}")
     data = {"name":categoryNewName,"description":categoryNewDescription}
-    response = requests.put("http://localhost:8080/user/"+username+"/category/"+categoryOldName, json=data, headers=token)
+    response = requests.put(url+"/user/"+username+"/category/"+categoryOldName, json=data, headers=token)
     printResponseInfo(response)
     
 def testDeleteCategory(username, categoryName, token):
     print("Testing deleting category {http://localhost:8080/user/{username}/category/{categoryName}}")
-    response = requests.delete("http://localhost:8080/user/"+username+"/category/"+categoryName, headers=token)
+    response = requests.delete(url+"/user/"+username+"/category/"+categoryName, headers=token)
     printResponseInfo(response)
     
 def testAddTask(username, categoryName, taskName, taskDescription, 
@@ -95,7 +97,7 @@ def testAddTask(username, categoryName, taskName, taskDescription,
     
 def getTasks(username, categoryName, token):
     print("Testing getting task {http://localhost:8080/user/{username}/category/{categoryName}/task}")
-    response = requests.get("http://localhost:8080/user/"+username+"/category/"+categoryName+"/task", headers=token)
+    response = requests.get(url+"/user/"+username+"/category/"+categoryName+"/task", headers=token)
     printResponseInfo(response)
     
 def testEditTask(username, categoryName, taskId, taskName, taskDescription, 
@@ -103,12 +105,12 @@ def testEditTask(username, categoryName, taskId, taskName, taskDescription,
     print("Testing editing task {http://localhost:8080/user/{username}/category/{categoryName}/task/{taskId}}")
     data={"name":taskName,"description":taskDescription,"startDateTime":startDateTime,
         "endDateTime":endDateTime,"active":isActive,"notification":notification}
-    response = requests.put("http://localhost:8080/user/"+username+"/category/"+categoryName+"/task/"+str(taskId), json=data, headers=token)
+    response = requests.put(url+"/user/"+username+"/category/"+categoryName+"/task/"+str(taskId), json=data, headers=token)
     printResponseInfo(response)
     
 def testDeleteTask(username, categoryName, taskId, token):
     print("Testing deleting task {http://localhost:8080/user/{username}/category/{categoryName}/task/{taskId}}")
-    response = requests.delete("http://localhost:8080/user/"+username+"/category/"+categoryName+"/task/"+str(taskId), headers=token)
+    response = requests.delete(url+"/user/"+username+"/category/"+categoryName+"/task/"+str(taskId), headers=token)
     printResponseInfo(response)
     
 for error in errorList:
@@ -116,7 +118,7 @@ for error in errorList:
 
 print("*******************************************************")
 
-if(testConnection('localhost',8080)==False):
+if(testConnection(address,port)==False):
     print("Error while connecting to server. Please check host and port")
 else:
     testGetUsers()

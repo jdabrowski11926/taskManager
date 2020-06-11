@@ -1,6 +1,5 @@
 package WAT.I8E2S4.TaskManager.security;
 
-import WAT.I8E2S4.TaskManager.User.CORSFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -48,33 +47,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(http401);
     }
 
-    /*@Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://localhost:3000"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST, DELETE, PUT"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }*/
-
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-        /*UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return source;*/
-
         CorsConfiguration configuration = new CorsConfiguration();
-        //configuration.applyPermitDefaultValues();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","DELETE","PUT","OPTIONS"));
         configuration.setAllowCredentials(true);
         configuration.addAllowedHeader("*");
         configuration.setExposedHeaders(Arrays.asList("Authorization, X-Content-Type-Options, " +
                         "X-XSS-Protection, Cache-Control, Pragma, Expires, X-Frame-Options, Content-Length, Date"));
-        //configuration.setAllowedHeaders(Arrays.asList("Authorization, X-Content-Type-Options, " +
-        //        "X-XSS-Protection, Cache-Control, Pragma, Expires, X-Frame-Options, Content-Length, Content-Type, Date, Access-Control-Allow-Origin"));
-        System.out.println("LISTA DOZWOLONYCH HEADERÓW : "+configuration.getAllowedHeaders().toString());
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

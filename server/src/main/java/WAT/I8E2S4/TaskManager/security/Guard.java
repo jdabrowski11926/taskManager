@@ -12,7 +12,6 @@ public class Guard {
     private UserRepository userRepository;
 
     public boolean checkUsername(Authentication auth, String name){
-        System.out.println("GUARD - CHECK USERNAME");
         User user = userRepository.findByUsername(name).orElseThrow(
                 ()-> new UserNotFoundException()
         );

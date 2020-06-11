@@ -19,7 +19,6 @@ public class TaskController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void addTask(@RequestBody TaskRequest task, @PathVariable String username, @PathVariable String categoryName){
-        System.out.println("ADD TASK "+task.getName());
         if(task.getName()=="") throw new TaskNoDataException();
         if(task.getStartDateTime().isAfter(task.getEndDateTime())) throw  new TaskNoDataException("Inserted invalid data, start date is later than end date");
         Task result = Task.builder()
@@ -38,13 +37,11 @@ public class TaskController {
 
     @GetMapping()
     public List<TaskResponse> getTasksByCategory(@PathVariable String username, @PathVariable String categoryName){
-        System.out.println("GET TASKS BY CATEGORY "+categoryName);
         return TaskResponse.makeList(taskRepository.findAllByCategory_NameAndCategory_User_username(categoryName, username));
     }
 
     @PutMapping("/{id}")
     public void editTask(@PathVariable String username, @PathVariable String categoryName, @PathVariable long id, @RequestBody TaskRequestEdit task){
-        System.out.println("EDIT TASK "+task.getName());
         if(task.getName()=="") throw new TaskNoDataException();
         if(task.getStartDateTime().isAfter(task.getEndDateTime())) throw  new TaskNoDataException("Inserted invalid data, start date is later than end date");
         Task dbTask = taskRepository.findByIdAndCategory_NameAndCategory_User_Username(id,categoryName,username)
@@ -64,7 +61,6 @@ public class TaskController {
 
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable long id, @PathVariable String username, @PathVariable String categoryName){
-        System.out.println("DELETE TASK");
         Task task = taskRepository.findByIdAndCategory_NameAndCategory_User_Username(id,categoryName, username)
                 .orElseThrow(()->new TaskNotFoundException());
         taskRepository.delete(task);

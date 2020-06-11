@@ -22,10 +22,6 @@ public class CategoryController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void addCategory(@RequestBody CategoryRequestAndResponse category, @PathVariable String username){
-        System.out.println("ADD CATEGORY");
-        System.out.println("CATEGORY NAME "+category.getName());
-        System.out.println("CATEGORY DESC "+category.getDescription());
-        System.out.println("CATEGORY USER "+category.getUser());
         if(category.getName()=="") throw new CategoryNoDataException();
         User user = userRepository.findByUsername(username).orElseThrow(
                 ()->new UserNotFoundException()
@@ -44,13 +40,11 @@ public class CategoryController {
 
     @GetMapping
     public List<CategoryRequestAndResponse> getCategories(@PathVariable String username){
-        System.out.println("GET CATEGORIES");
         return CategoryRequestAndResponse.makeList(categoryRepository.findAllByUserUsername(username));
     }
 
     @PutMapping("/{categoryName}")
     public void editCategory(@RequestBody Category editedCategory, @PathVariable String categoryName, @PathVariable String username){
-        System.out.println("EDIT CATEGORY");
         if(editedCategory.getName()=="") throw new CategoryNoDataException();
         Category dbCategory = categoryRepository.findByNameAndUserUsername(categoryName,username)
                 .orElseThrow(
@@ -67,7 +61,6 @@ public class CategoryController {
 
     @DeleteMapping("/{categoryName}")
     public void deleteCategory(@PathVariable String categoryName, @PathVariable String username){
-        System.out.println("DELETE CATEGORY");
         Category dbCategory = categoryRepository.findByNameAndUserUsername(categoryName,username)
                 .orElseThrow(
                         ()-> new CategoryNotFoundException("category not found!")
