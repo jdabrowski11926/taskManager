@@ -5,48 +5,40 @@ import I8E2S4.mobileTaskManager.logic.CalendarAdapter
 import I8E2S4.mobileTaskManager.logic.CalendarItem
 import I8E2S4.mobileTaskManager.logic.SessionCallbackActivity
 import I8E2S4.mobileTaskManager.model.Category
-import I8E2S4.mobileTaskManager.model.Task
 import I8E2S4.mobileTaskManager.server.JsonAPI
+import I8E2S4.mobileTaskManager.ui.CategoryActivities.EditCategoryActivity
+import I8E2S4.mobileTaskManager.ui.CategoryActivities.NewCategoryActivity
+import I8E2S4.mobileTaskManager.ui.TaskActivities.NewTaskActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.SubMenu
-import android.widget.ArrayAdapter
 import android.widget.PopupMenu
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_calendar.*
 import kotlin.collections.ArrayList
-
 
 class CalendarActivity : SessionCallbackActivity() {
 
-    protected val toolbar by lazy {findViewById<Toolbar>(R.id.toolbar)}
-    protected val floatingButton by lazy {findViewById<FloatingActionButton>(R.id.calendarFloatingActionButton)}
-    protected val listView by lazy {findViewById<RecyclerView>(R.id.calendarListView)}
-    protected val taskList = ArrayList<Task>()
-    protected val taskListAdapter by lazy {ArrayAdapter<Task>(this,R.layout.activity_calendar,taskList)}
-
-    protected val categoryEditMenuItems = ArrayList<MenuItem>()
-    protected val categoryFilterMenuItems = ArrayList<MenuItem>()
-    protected var menuItemEditCategories : SubMenu? = null
-    protected var menuItemFilterCategories : SubMenu? = null
-    protected var userCategoryList = ArrayList<Category>()
-    protected var sortingMethod = "date_asc"
+    private val categoryEditMenuItems = ArrayList<MenuItem>()
+    private val categoryFilterMenuItems = ArrayList<MenuItem>()
+    private var menuItemEditCategories : SubMenu? = null
+    private var menuItemFilterCategories : SubMenu? = null
+    private var userCategoryList = ArrayList<Category>()
+    private var sortingMethod = "date_asc"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
         toolbar.title = "Calendar"
         setSupportActionBar(toolbar)
-        listView.setHasFixedSize(true)
+        calendarListView.setHasFixedSize(true)
 
-        floatingButton.setOnClickListener {
-            val popupMenu: PopupMenu = PopupMenu(this,floatingButton)
+        calendarFloatingActionButton.setOnClickListener {
+            val popupMenu = PopupMenu(this,calendarFloatingActionButton)
             popupMenu.menuInflater.inflate(R.menu.create_menu, popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item->
+            popupMenu.setOnMenuItemClickListener { item->
                 when(item.itemId){
                     R.id.item_create_category->{
                         val intent = Intent(this, NewCategoryActivity::class.java)
@@ -64,7 +56,7 @@ class CalendarActivity : SessionCallbackActivity() {
                     }
                 }
                 true
-            })
+            }
             popupMenu.show()
         }
     }
@@ -75,7 +67,7 @@ class CalendarActivity : SessionCallbackActivity() {
         invalidateOptionsMenu()
     }
 
-    fun getCategoryList(){
+    private fun getCategoryList(){
         userCategoryList.clear()
         val retrofit = createRetrofit(address)
         if(retrofit!=null) {
@@ -94,7 +86,7 @@ class CalendarActivity : SessionCallbackActivity() {
         }
     }
 
-    fun updateMenuItems(){
+    private fun updateMenuItems(){
         categoryEditMenuItems.clear()
         categoryFilterMenuItems.clear()
         for(category in userCategoryList){
@@ -102,7 +94,7 @@ class CalendarActivity : SessionCallbackActivity() {
                 categoryEditMenuItems.add(menuItemEditCategories?.add("" + category.name)!!)
             }
             if(menuItemFilterCategories!=null){
-                var menuItemFilter = menuItemFilterCategories?.add("" + category.name)!!
+                val menuItemFilter = menuItemFilterCategories?.add("" + category.name)!!
                 menuItemFilter.isCheckable = true
                 menuItemFilter.isChecked = true
                 categoryFilterMenuItems.add(menuItemFilter)
@@ -110,7 +102,7 @@ class CalendarActivity : SessionCallbackActivity() {
         }
     }
 
-    fun updateTaskList(){
+    private fun updateTaskList(){
         val retrofit = createRetrofit(address)
         val calendarItemList = ArrayList<CalendarItem>()
         if(retrofit!=null){
@@ -124,21 +116,21 @@ class CalendarActivity : SessionCallbackActivity() {
                             for(task in bodyTasks){
                                 calendarItemList.add(CalendarItem(task.id!!,task.name.toString(),task.description.toString(),category.name.toString(),task.startDateTime.toString(),task.endDateTime.toString(),task.active!!,task.notification!!))
                             }
-                            var sortedList = sortCalendarItemList(calendarItemList)
-                            listView.adapter = CalendarAdapter(sortedList,this, jwtToken,username, address)
-                            listView.layoutManager = LinearLayoutManager(this)
+                            val sortedList = sortCalendarItemList(calendarItemList)
+                            calendarListView.adapter = CalendarAdapter(sortedList,this, jwtToken,username, address)
+                            calendarListView.layoutManager = LinearLayoutManager(this)
                         }
                     }
                 }
                 if(!isAnyCategoryAllowedByFilter()){
-                    listView.adapter = CalendarAdapter(calendarItemList,this, jwtToken,username, address)
-                    listView.layoutManager = LinearLayoutManager(this)
+                    calendarListView.adapter = CalendarAdapter(calendarItemList,this, jwtToken,username, address)
+                    calendarListView.layoutManager = LinearLayoutManager(this)
                 }
             }
         }
     }
 
-    fun sortCalendarItemList(calendarItemList: ArrayList<CalendarItem>):ArrayList<CalendarItem>{
+    private fun sortCalendarItemList(calendarItemList: ArrayList<CalendarItem>):ArrayList<CalendarItem>{
         if(sortingMethod=="date_asc")           return ArrayList(calendarItemList.sortedWith(compareBy {it.textStartDateTime}))
         if(sortingMethod=="date_desc")          return ArrayList(calendarItemList.sortedWith(compareBy {it.textStartDateTime}).reversed())
         if(sortingMethod=="name_asc")           return ArrayList(calendarItemList.sortedWith(compareBy {it.textName}))
@@ -152,7 +144,7 @@ class CalendarActivity : SessionCallbackActivity() {
         return calendarItemList
     }
 
-    fun isCategoryAllowedByFilter(category: Category): Boolean{
+    private fun isCategoryAllowedByFilter(category: Category): Boolean{
         for(categoryItem in categoryFilterMenuItems){
             if(category.name.equals(categoryItem.title.toString())){
                 println("KATEGORIA "+categoryItem.title.toString()+" jest ustawiona na "+categoryItem.isChecked.toString())
@@ -162,7 +154,7 @@ class CalendarActivity : SessionCallbackActivity() {
         return false
     }
 
-    fun isAnyCategoryAllowedByFilter(): Boolean{
+    private fun isAnyCategoryAllowedByFilter(): Boolean{
         for(category in userCategoryList){
             if(isCategoryAllowedByFilter(category)) return true
         }
@@ -280,9 +272,9 @@ class CalendarActivity : SessionCallbackActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun getCategoryOfName(categoryName: String): Category? {
+    private fun getCategoryOfName(categoryName: String): Category? {
         for(category in userCategoryList){
-            if(categoryName.equals(category.name))
+            if(categoryName == category.name)
                 return category
         }
         return null

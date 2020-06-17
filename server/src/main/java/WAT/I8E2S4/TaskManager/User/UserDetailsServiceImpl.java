@@ -1,5 +1,6 @@
 package WAT.I8E2S4.TaskManager.User;
 
+import WAT.I8E2S4.TaskManager.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
 
 import org.springframework.security.core.userdetails.UserDetails;

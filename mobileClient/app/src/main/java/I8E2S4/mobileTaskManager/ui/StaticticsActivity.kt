@@ -5,20 +5,16 @@ import I8E2S4.mobileTaskManager.logic.SessionCallbackActivity
 import I8E2S4.mobileTaskManager.server.JsonAPI
 import android.os.Build
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import kotlinx.android.synthetic.main.activity_statictics.*
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
 class StaticticsActivity : SessionCallbackActivity() {
-
-    protected val buttonBack by lazy {findViewById<Button>(R.id.staticticsButtonBack)}
-    protected val tableLayout by lazy{findViewById<TableLayout>(R.id.TableLayoutStatictics)}
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +34,9 @@ class StaticticsActivity : SessionCallbackActivity() {
                         val categoryNameTextfield = TextView(row.context)
                         val taskAmountTextfield = TextView(row.context)
                         val categoryTimeTextfield = TextView(row.context)
-                        categoryNameTextfield.setText("" + category.name)
-                        taskAmountTextfield.setText("Amount of tasks")
-                        categoryTimeTextfield.setText("Category time")
+                        categoryNameTextfield.text = "" + category.name
+                        taskAmountTextfield.text = "Amount of tasks"
+                        categoryTimeTextfield.text = "Category time"
                         row.addView(categoryNameTextfield)
                         row.addView(taskAmountTextfield)
                         row.addView(categoryTimeTextfield)
@@ -58,12 +54,12 @@ class StaticticsActivity : SessionCallbackActivity() {
                                 taskAmountTextfield.text = "" + numerOfTasks
                                 categoryTimeTextfield.text = "" + convertSecondsToTimeString(secondsSpent)
                             }
-                            tableLayout.addView(row)
+                            TableLayoutStatictics.addView(row)
                         }
                     }
                 }
             }
-            buttonBack.setOnClickListener {
+            staticticsButtonBack.setOnClickListener {
                 super.onBackPressed()
             }
         }
@@ -78,7 +74,7 @@ class StaticticsActivity : SessionCallbackActivity() {
         return duration.seconds
     }
 
-    fun convertSecondsToTimeString(seconds: Long): String{
+    private fun convertSecondsToTimeString(seconds: Long): String{
         val day = TimeUnit.SECONDS.toDays(seconds)
         val hours = TimeUnit.SECONDS.toHours(seconds) - day * 24
         val minute = TimeUnit.SECONDS.toMinutes(seconds) - TimeUnit.SECONDS.toHours(seconds) * 60
@@ -90,10 +86,10 @@ class StaticticsActivity : SessionCallbackActivity() {
     }
 
     override fun onDisableAll() {
-        buttonBack.isEnabled = false
+        staticticsButtonBack.isEnabled = false
     }
 
     override fun onEnableAll() {
-        buttonBack.isEnabled = true
+        staticticsButtonBack.isEnabled = true
     }
 }

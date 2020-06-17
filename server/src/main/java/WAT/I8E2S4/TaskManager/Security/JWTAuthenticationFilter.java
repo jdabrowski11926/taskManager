@@ -1,5 +1,6 @@
-package WAT.I8E2S4.TaskManager.User;
+package WAT.I8E2S4.TaskManager.Security;
 
+import WAT.I8E2S4.TaskManager.User.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,17 +12,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 
-import static WAT.I8E2S4.TaskManager.security.SecurityConstants.*;
+import static WAT.I8E2S4.TaskManager.Security.SecurityConstants.*;
 
 @AllArgsConstructor
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -33,12 +30,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             HttpServletResponse response) throws AuthenticationException {
         try{
             User creds = new ObjectMapper().readValue(request.getInputStream(), User.class);
-            if(creds.getUsername()==null){ throw new BadCredentialsException("1000"); }
-            if(creds.getPassword()==null){ throw new BadCredentialsException("1000"); }
+            if(creds.getUsername()==null){ throw new BadCredentialsException("Username is empty"); }
+            if(creds.getPassword()==null){ throw new BadCredentialsException("Password is empty"); }
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     creds.getUsername(),
-                    creds.getPassword(),
-                    new ArrayList<>()
+                    creds.getPassword()
             ));
         }catch(IOException e){
             throw new RuntimeException(e);
@@ -50,7 +46,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain chain,
-            Authentication authResult) throws IOException, ServletException {
+            Authentication authResult){
         String token = JWT.create()
                 .withSubject(((org.springframework.security.core.userdetails.User) authResult.getPrincipal()).getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))

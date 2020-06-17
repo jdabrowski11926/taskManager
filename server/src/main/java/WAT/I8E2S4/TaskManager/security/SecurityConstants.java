@@ -1,4 +1,4 @@
-package WAT.I8E2S4.TaskManager.security;
+package WAT.I8E2S4.TaskManager.Security;
 
 public class SecurityConstants {
     public static final String SECRET = "316E1EF39F54A5ECA4EDDA6B96568";

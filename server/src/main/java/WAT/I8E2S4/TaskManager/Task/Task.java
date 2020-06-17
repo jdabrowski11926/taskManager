@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="task")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +27,6 @@ public class Task {
     @Getter @Setter private boolean notification;
 
     @ManyToOne()
-    @JoinColumn(name = "category_id")
     @Getter @Setter Category category;
 
     public Task(String name, String description, LocalDateTime startDateTime, LocalDateTime endDateTime, boolean active, boolean notification){

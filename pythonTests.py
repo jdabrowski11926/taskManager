@@ -126,6 +126,7 @@ else:
     testRegisterUser("", "testPassword")
     testRegisterUser("testUsername", "testPassword")
     testRegisterUser("testUsername", "testPassword")
+    testRegisterUser("testUsername2", "testPassword2")
     token = testLoginUser("testUsername", "testPassword")
     testGetUsers()
     

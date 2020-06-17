@@ -2,8 +2,7 @@ package I8E2S4.mobileTaskManager.logic
 
 import I8E2S4.mobileTaskManager.R
 import I8E2S4.mobileTaskManager.ui.CalendarActivity
-import I8E2S4.mobileTaskManager.ui.EditTaskActivity
-import I8E2S4.mobileTaskManager.ui.NewTaskActivity
+import I8E2S4.mobileTaskManager.ui.TaskActivities.EditTaskActivity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View

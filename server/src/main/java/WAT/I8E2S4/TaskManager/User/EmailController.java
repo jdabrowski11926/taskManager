@@ -5,7 +5,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.bind.annotation.RestController;
 
-import static WAT.I8E2S4.TaskManager.security.SecurityConstants.*;
+import static WAT.I8E2S4.TaskManager.Security.SecurityConstants.*;
 
 @RestController
 public class EmailController {
@@ -28,7 +28,7 @@ public class EmailController {
         javaMailSender.send(mailMessage);
     }
 
-    void sendEmail(User user, Task task) {
+    public void sendEmail(User user, Task task) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom("taskControllerTIM@gmail.com");
         mailMessage.setTo(user.getUsername());

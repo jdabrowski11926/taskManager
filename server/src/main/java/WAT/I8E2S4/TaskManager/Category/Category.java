@@ -11,7 +11,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="category")
 public class Category{
 
     @Id
@@ -25,7 +24,6 @@ public class Category{
     private Set<Task> tasks;
 
     @ManyToOne()
-    @JoinColumn(name="user_id")
     @Getter @Setter User user;
 
     public Category(String name, User user){

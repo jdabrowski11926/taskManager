@@ -1,9 +1,12 @@
-package WAT.I8E2S4.TaskManager.User;
+package WAT.I8E2S4.TaskManager.Controllers;
 
 import WAT.I8E2S4.TaskManager.Category.Category;
-import WAT.I8E2S4.TaskManager.Category.CategoryRepository;
+import WAT.I8E2S4.TaskManager.Repositories.CategoryRepository;
+import WAT.I8E2S4.TaskManager.Repositories.UserRepository;
+import WAT.I8E2S4.TaskManager.Services.UserService;
 import WAT.I8E2S4.TaskManager.Task.Task;
-import WAT.I8E2S4.TaskManager.Task.TaskRepository;
+import WAT.I8E2S4.TaskManager.Repositories.TaskRepository;
+import WAT.I8E2S4.TaskManager.User.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,39 +26,24 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private EmailController emailController;
 
+    private UserService userService;
+
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
     public void signUp(@RequestBody User user){
-        if(user.getPassword()=="" || user.getUsername()==""){
-            throw new UserNoDataException();
-        }
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.findByUsername(user.getUsername()).ifPresent(
-                u -> {
-                    throw new UserAlreadyExistsException();
-                }
-        );
-        userRepository.save(user);
+        userService.signUp(user);
     }
 
     @PostMapping("/user/{username}/edit_account")
     @ResponseStatus(HttpStatus.OK)
     public void editAccount(@PathVariable String username, @RequestBody UserEditPassword editData){
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException());
-        String oldPassword = editData.getOldPassword();
-        String newPassword = editData.getNewPassword();
-        if(newPassword=="") throw new UserNoDataException("Password can not be empty");
-        if(!bCryptPasswordEncoder.matches(oldPassword, user.getPassword())){
-            throw new InvalidOldPasswordException();
-        }
-        user.setPassword(bCryptPasswordEncoder.encode(newPassword));
-        userRepository.save(user);
+        userService.editAccount(username, editData);
     }
 
     @GetMapping("/users")
     @ResponseStatus(HttpStatus.OK)
-    public List<User> showUsers(){
-        return userRepository.findAll();
+    public List<User> getUsers(){
+        return userService.getUsers();
     }
 
     @Scheduled(fixedRate = 60000)

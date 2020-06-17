@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CBE4EC"
-    tools:context=".ui.TaskActivity">
+    tools:context=".ui.TaskActivities.TaskActivity">
 
     <Button
         android:id="@+id/taskButtonBack"

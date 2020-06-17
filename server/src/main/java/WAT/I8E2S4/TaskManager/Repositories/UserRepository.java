@@ -1,5 +1,6 @@
-package WAT.I8E2S4.TaskManager.User;
+package WAT.I8E2S4.TaskManager.Repositories;
 
+import WAT.I8E2S4.TaskManager.User.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.ArrayList;

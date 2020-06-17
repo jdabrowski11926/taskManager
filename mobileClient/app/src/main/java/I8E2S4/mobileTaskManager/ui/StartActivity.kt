@@ -1,15 +1,14 @@
 package I8E2S4.mobileTaskManager.ui
 
 import I8E2S4.mobileTaskManager.R
+import I8E2S4.mobileTaskManager.ui.AuthActivities.LoginActivity
+import I8E2S4.mobileTaskManager.ui.AuthActivities.RegisterActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import kotlinx.android.synthetic.main.activity_start.*
 
 class StartActivity : AppCompatActivity() {
-
-    protected val buttonLogin by lazy {findViewById<Button>(R.id.buttonLogin)}
-    protected val buttonRegister by lazy {findViewById<Button>(R.id.buttonRegister)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

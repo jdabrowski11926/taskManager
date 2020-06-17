@@ -1,4 +1,4 @@
-package WAT.I8E2S4.TaskManager.User;
+package WAT.I8E2S4.TaskManager.Security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -11,14 +11,10 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
-import static WAT.I8E2S4.TaskManager.security.SecurityConstants.*;
+import static WAT.I8E2S4.TaskManager.Security.SecurityConstants.*;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
@@ -56,18 +52,5 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             return null;
         }
         return null;
-    }
-
-    private String getBody(HttpServletRequest request) throws IOException {
-        InputStream inStream = request.getInputStream();
-        InputStreamReader reader = new InputStreamReader(inStream);
-        BufferedReader bReader = new BufferedReader(reader);
-        StringBuffer sb = new StringBuffer();
-        String inputLine;
-        while ((inputLine = bReader.readLine()) != null) {
-            sb.append(inputLine);
-            sb.append("\n");
-        }
-        return sb.toString();
     }
 }

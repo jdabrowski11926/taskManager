@@ -1,4 +1,4 @@
-package WAT.I8E2S4.TaskManager.security;
+package WAT.I8E2S4.TaskManager.Security;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import WAT.I8E2S4.TaskManager.User.JWTAuthenticationFilter;
-import WAT.I8E2S4.TaskManager.User.JWTAuthorizationFilter;
 import WAT.I8E2S4.TaskManager.User.UserDetailsServiceImpl;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -19,7 +17,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-import static WAT.I8E2S4.TaskManager.security.SecurityConstants.SIGN_UP_URL;
+import static WAT.I8E2S4.TaskManager.Security.SecurityConstants.SIGN_UP_URL;
 
 @AllArgsConstructor
 @EnableWebSecurity

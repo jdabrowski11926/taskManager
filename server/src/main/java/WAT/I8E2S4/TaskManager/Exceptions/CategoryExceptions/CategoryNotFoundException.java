@@ -1,4 +1,4 @@
-package WAT.I8E2S4.TaskManager.Category;
+package WAT.I8E2S4.TaskManager.Exceptions.CategoryExceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

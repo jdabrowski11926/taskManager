@@ -14,13 +14,13 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.StaticticsActivity"></activity>
         <activity android:name=".ui.PasswordActivity" />
-        <activity android:name=".ui.NewTaskActivity" />
-        <activity android:name=".ui.EditTaskActivity" />
-        <activity android:name=".ui.NewCategoryActivity" />
-        <activity android:name=".ui.EditCategoryActivity" />
+        <activity android:name=".ui.TaskActivities.NewTaskActivity" />
+        <activity android:name=".ui.TaskActivities.EditTaskActivity" />
+        <activity android:name=".ui.CategoryActivities.NewCategoryActivity" />
+        <activity android:name=".ui.CategoryActivities.EditCategoryActivity" />
         <activity android:name=".ui.CalendarActivity" />
-        <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.AuthActivities.RegisterActivity" />
+        <activity android:name=".ui.AuthActivities.LoginActivity" />
         <activity
             android:name=".ui.StartActivity"
             android:label="@string/title_activity_start"

@@ -2,40 +2,30 @@ package I8E2S4.mobileTaskManager.ui
 
 import I8E2S4.mobileTaskManager.R
 import I8E2S4.mobileTaskManager.logic.SessionCallbackActivity
-import I8E2S4.mobileTaskManager.model.User
 import I8E2S4.mobileTaskManager.model.UserEditPassword
 import I8E2S4.mobileTaskManager.server.JsonAPI
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_password.*
 
 class PasswordActivity : SessionCallbackActivity() {
-
-    protected val buttonBack by lazy {findViewById<Button>(R.id.passwordButtonBack)}
-    protected val buttonAccept by lazy {findViewById<Button>(R.id.passwordButtonAccept)}
-    protected val textfieldOldPassword by lazy {findViewById<EditText>(R.id.passwordTextfieldOldPassword)}
-    protected val textfieldNewPassword by lazy {findViewById<EditText>(R.id.passwordTextfieldNewPassword)}
-    protected val textfieldConfirmPassword by lazy {findViewById<EditText>(R.id.passwordTextfieldConfirmPassword)}
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_password)
 
-        buttonBack.setOnClickListener {
+        passwordButtonBack.setOnClickListener {
             super.onBackPressed()
         }
 
-        buttonAccept.setOnClickListener{
-            if(textfieldNewPassword.text.toString().equals(textfieldConfirmPassword.text.toString())){
+        passwordButtonAccept.setOnClickListener{
+            if(passwordTextfieldNewPassword.text.toString() == passwordTextfieldConfirmPassword.text.toString()){
                 val retrofit = createRetrofit(address)
                 if(retrofit!=null){
                     val call = retrofit.create(JsonAPI::class.java)
-                        .editAccount(username, UserEditPassword(textfieldOldPassword.text.toString(),textfieldNewPassword.text.toString()),jwtToken)
-                    runCallback(call) { _, responseTasks ->
+                        .editAccount(username, UserEditPassword(passwordTextfieldOldPassword.text.toString(),passwordTextfieldNewPassword.text.toString()),jwtToken)
+                    runCallback(call) { _, _ ->
                         val intent = Intent(applicationContext, StartActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         Toast.makeText(this@PasswordActivity, "Password has been changed. Please log in again", Toast.LENGTH_SHORT).show()
@@ -48,18 +38,18 @@ class PasswordActivity : SessionCallbackActivity() {
     }
 
     override fun onDisableAll() {
-        buttonBack.isEnabled = false
-        buttonAccept.isEnabled = false
-        textfieldOldPassword.isEnabled = false
-        textfieldNewPassword.isEnabled = false
-        textfieldConfirmPassword.isEnabled = false
+        passwordButtonBack.isEnabled = false
+        passwordButtonAccept.isEnabled = false
+        passwordTextfieldOldPassword.isEnabled = false
+        passwordTextfieldNewPassword.isEnabled = false
+        passwordTextfieldConfirmPassword.isEnabled = false
     }
 
     override fun onEnableAll() {
-        buttonBack.isEnabled = true
-        buttonAccept.isEnabled = true
-        textfieldOldPassword.isEnabled = true
-        textfieldNewPassword.isEnabled = true
-        textfieldConfirmPassword.isEnabled = true
+        passwordButtonBack.isEnabled = true
+        passwordButtonAccept.isEnabled = true
+        passwordTextfieldOldPassword.isEnabled = true
+        passwordTextfieldNewPassword.isEnabled = true
+        passwordTextfieldConfirmPassword.isEnabled = true
     }
 }
