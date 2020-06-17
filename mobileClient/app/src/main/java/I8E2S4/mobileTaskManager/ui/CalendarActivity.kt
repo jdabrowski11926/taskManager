@@ -71,12 +71,16 @@ class CalendarActivity : SessionCallbackActivity() {
         userCategoryList.clear()
         val retrofit = createRetrofit(address)
         if(retrofit!=null) {
+            println("POBIERANIE KATEGORII")
             val call = retrofit.create(JsonAPI::class.java)
                 .getCategoryList(username, jwtToken)
             runCallback(call) { _, response ->
+                println("POBIERANIE KATEGORII - rozpoczecia CALL")
                 val body = response.body()
                 if (body != null) {
+                    println("POBIERANIE KATEGORII - body nie puste")
                     for(category in body){
+                        println("KATEGORIA : " + category.name)
                         userCategoryList.add(category)
                     }
                     updateMenuItems()

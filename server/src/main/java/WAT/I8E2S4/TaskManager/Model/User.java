@@ -1,14 +1,15 @@
-package WAT.I8E2S4.TaskManager.User;
+package WAT.I8E2S4.TaskManager.Model;
 
-import WAT.I8E2S4.TaskManager.Category.Category;
+import WAT.I8E2S4.TaskManager.Model.Category;
 
 import lombok.*;
-import lombok.experimental.PackagePrivate;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @NoArgsConstructor
+@Table(name="user")
 public class User{
 
     @Id
@@ -39,11 +40,6 @@ public class User{
     }
 
     public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public User(String username, String password) {
-        this.username = username;
         this.password = password;
     }
 }

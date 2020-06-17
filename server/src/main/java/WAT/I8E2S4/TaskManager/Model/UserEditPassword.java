@@ -1,4 +1,4 @@
-package WAT.I8E2S4.TaskManager.User;
+package WAT.I8E2S4.TaskManager.Model;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package WAT.I8E2S4.TaskManager.Security;
 
-import WAT.I8E2S4.TaskManager.User.User;
+import WAT.I8E2S4.TaskManager.Model.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;

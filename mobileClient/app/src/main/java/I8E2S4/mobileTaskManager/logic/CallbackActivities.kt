@@ -57,8 +57,7 @@ abstract class CallbackActivity : AppCompatActivity(){
     }
 
     fun <T>runCallback(
-        call: Call<T>,
-        onSuccessfulResponse: (call: Call<T>, response: Response<T>) -> Unit){
+        call: Call<T>, onSuccessfulResponse: (call: Call<T>, response: Response<T>) -> Unit){
             disableAll()
             val callback: CallbackActivityCallback<T> = object :CallbackActivityCallback<T>(this){
                override fun onSuccessfulResponse(call: Call<T>, response: Response<T>) {

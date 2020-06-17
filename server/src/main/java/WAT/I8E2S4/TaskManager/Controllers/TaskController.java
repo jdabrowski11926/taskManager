@@ -1,8 +1,7 @@
 package WAT.I8E2S4.TaskManager.Controllers;
 
-import WAT.I8E2S4.TaskManager.Task.TaskRequest;
-import WAT.I8E2S4.TaskManager.Task.TaskRequestEdit;
-import WAT.I8E2S4.TaskManager.Task.TaskResponse;
+import WAT.I8E2S4.TaskManager.Model.Task;
+import WAT.I8E2S4.TaskManager.Responses.TaskResponse;
 import WAT.I8E2S4.TaskManager.Services.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ public class TaskController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addTask(@RequestBody TaskRequest task, @PathVariable String username, @PathVariable String categoryName){
+    public void addTask(@RequestBody Task task, @PathVariable String username, @PathVariable String categoryName){
         taskService.addTask(task, username, categoryName);
     }
 
@@ -29,7 +28,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public void editTask(@PathVariable String username, @PathVariable String categoryName, @PathVariable long id, @RequestBody TaskRequestEdit task){
+    public void editTask(@PathVariable String username, @PathVariable String categoryName, @PathVariable long id, @RequestBody Task task){
         taskService.editTask(username, categoryName, id, task);
     }
 

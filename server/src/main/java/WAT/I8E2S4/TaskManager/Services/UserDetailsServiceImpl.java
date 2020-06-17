@@ -1,5 +1,6 @@
-package WAT.I8E2S4.TaskManager.User;
+package WAT.I8E2S4.TaskManager.Services;
 
+import WAT.I8E2S4.TaskManager.Model.User;
 import WAT.I8E2S4.TaskManager.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
 

@@ -1,6 +1,6 @@
 package WAT.I8E2S4.TaskManager.Repositories;
 
-import WAT.I8E2S4.TaskManager.Category.Category;
+import WAT.I8E2S4.TaskManager.Model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

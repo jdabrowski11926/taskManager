@@ -1,6 +1,6 @@
-package WAT.I8E2S4.TaskManager.Task;
+package WAT.I8E2S4.TaskManager.Model;
 
-import WAT.I8E2S4.TaskManager.Category.Category;
+import WAT.I8E2S4.TaskManager.Model.Category;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
@@ -10,8 +10,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name="task")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,13 +30,4 @@ public class Task {
 
     @ManyToOne()
     @Getter @Setter Category category;
-
-    public Task(String name, String description, LocalDateTime startDateTime, LocalDateTime endDateTime, boolean active, boolean notification){
-        this.name = name;
-        this.description = description;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
-        this.active = active;
-        this.notification = notification;
-    }
 }

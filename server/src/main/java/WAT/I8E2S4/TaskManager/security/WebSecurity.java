@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import WAT.I8E2S4.TaskManager.User.UserDetailsServiceImpl;
+import WAT.I8E2S4.TaskManager.Services.UserDetailsServiceImpl;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -24,7 +24,7 @@ import static WAT.I8E2S4.TaskManager.Security.SecurityConstants.SIGN_UP_URL;
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
+
     private Http401 http401;
 
     @Override

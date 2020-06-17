@@ -1,7 +1,7 @@
 package WAT.I8E2S4.TaskManager.Controllers;
 
-import WAT.I8E2S4.TaskManager.Category.Category;
-import WAT.I8E2S4.TaskManager.Category.CategoryRequestAndResponse;
+import WAT.I8E2S4.TaskManager.Model.Category;
+import WAT.I8E2S4.TaskManager.Responses.CategoryResponse;
 import WAT.I8E2S4.TaskManager.Services.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,12 +18,12 @@ public class CategoryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCategory(@RequestBody CategoryRequestAndResponse category, @PathVariable String username){
+    public void addCategory(@RequestBody CategoryResponse category, @PathVariable String username){
         categoryService.addCategory(category, username);
     }
 
     @GetMapping
-    public List<CategoryRequestAndResponse> getCategories(@PathVariable String username){
+    public List<CategoryResponse> getCategories(@PathVariable String username){
         return categoryService.getCategories(username);
     }
 

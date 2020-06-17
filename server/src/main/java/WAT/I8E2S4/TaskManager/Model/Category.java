@@ -1,21 +1,20 @@
-package WAT.I8E2S4.TaskManager.Category;
+package WAT.I8E2S4.TaskManager.Model;
 
-import WAT.I8E2S4.TaskManager.User.User;
-import WAT.I8E2S4.TaskManager.Task.Task;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name="category")
 public class Category{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter private long id;
+    @Getter @Setter private Long id;
 
     @Getter @Setter private String name;
     @Getter @Setter private String description;
@@ -24,10 +23,6 @@ public class Category{
     private Set<Task> tasks;
 
     @ManyToOne()
+    @JoinColumn(name="user_id")
     @Getter @Setter User user;
-
-    public Category(String name, User user){
-        this.name = name;
-        this.user = user;
-    }
 }

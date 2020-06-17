@@ -3,7 +3,7 @@ package WAT.I8E2S4.TaskManager.Security;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import WAT.I8E2S4.TaskManager.User.User;
+import WAT.I8E2S4.TaskManager.Model.User;
 import WAT.I8E2S4.TaskManager.Exceptions.UserExceptions.UserNotFoundException;
 import WAT.I8E2S4.TaskManager.Repositories.UserRepository;
 

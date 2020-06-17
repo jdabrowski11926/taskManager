@@ -1,5 +1,6 @@
-package WAT.I8E2S4.TaskManager.Task;
+package WAT.I8E2S4.TaskManager.Responses;
 
+import WAT.I8E2S4.TaskManager.Model.Task;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class TaskResponse {
     private long id;
     private String name;
