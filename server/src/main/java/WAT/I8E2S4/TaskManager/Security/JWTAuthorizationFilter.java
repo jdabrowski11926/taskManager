@@ -28,22 +28,16 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             HttpServletResponse response,
             FilterChain chain) throws IOException, ServletException {
         String header = request.getHeader(HEADER_STRING);
-        if(header!=null) {
-            header = header.replaceAll("%20"," ");
+        if(header != null && header.startsWith(TOKEN_PREFIX)){
+            UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-        if(header == null || !header.startsWith(TOKEN_PREFIX)){
-            chain.doFilter(request, response);
-            return;
-        }
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(request, response);
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
-            token = token.replaceAll("%20"," ");
             String user = JWT.require(
                     Algorithm.HMAC512(SECRET.getBytes())).build()
                     .verify(token.replace(TOKEN_PREFIX, ""))

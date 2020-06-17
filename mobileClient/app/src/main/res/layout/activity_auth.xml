@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CBE4EC"
-    tools:context=".ui.AuthActivities.AuthActivity">
+    tools:context=".ui.authActivities.AuthActivity">
 
     <EditText
         android:id="@+id/authTextfieldUsername"
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ProgressBar
-        android:id="@+id/authProgressBar"
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="100dp"
         android:layout_height="100dp"

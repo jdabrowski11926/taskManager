@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="I8E2S4.mobileTaskManager">
+    package="i8e2s4.mobileTaskManager">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,17 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.StaticticsActivity"></activity>
-        <activity android:name=".ui.PasswordActivity" />
-        <activity android:name=".ui.TaskActivities.NewTaskActivity" />
-        <activity android:name=".ui.TaskActivities.EditTaskActivity" />
-        <activity android:name=".ui.CategoryActivities.NewCategoryActivity" />
-        <activity android:name=".ui.CategoryActivities.EditCategoryActivity" />
-        <activity android:name=".ui.CalendarActivity" />
-        <activity android:name=".ui.AuthActivities.RegisterActivity" />
-        <activity android:name=".ui.AuthActivities.LoginActivity" />
+        <activity android:name="i8e2s4.mobileTaskManager.ui.StaticticsActivity"></activity>
+        <activity android:name="i8e2s4.mobileTaskManager.ui.PasswordActivity" />
+        <activity android:name="i8e2s4.mobileTaskManager.ui.taskActivities.NewTaskActivity" />
+        <activity android:name="i8e2s4.mobileTaskManager.ui.taskActivities.EditTaskActivity" />
+        <activity android:name="i8e2s4.mobileTaskManager.ui.categoryActivities.NewCategoryActivity" />
+        <activity android:name="i8e2s4.mobileTaskManager.ui.categoryActivities.EditCategoryActivity" />
+        <activity android:name="i8e2s4.mobileTaskManager.ui.CalendarActivity" />
+        <activity android:name="i8e2s4.mobileTaskManager.ui.authActivities.RegisterActivity" />
+        <activity android:name="i8e2s4.mobileTaskManager.ui.authActivities.LoginActivity" />
         <activity
-            android:name=".ui.StartActivity"
+            android:name="i8e2s4.mobileTaskManager.ui.StartActivity"
             android:label="@string/title_activity_start"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

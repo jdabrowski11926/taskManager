@@ -9,12 +9,11 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="category")
 public class Category{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter private Long id;
+    @Getter @Setter private long id;
 
     @Getter @Setter private String name;
     @Getter @Setter private String description;
@@ -23,6 +22,5 @@ public class Category{
     private Set<Task> tasks;
 
     @ManyToOne()
-    @JoinColumn(name="user_id")
     @Getter @Setter User user;
 }

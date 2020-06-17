@@ -24,7 +24,7 @@ import static WAT.I8E2S4.TaskManager.Security.SecurityConstants.SIGN_UP_URL;
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    @Autowired
     private Http401 http401;
 
     @Override
@@ -33,9 +33,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.GET, "/users").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .authorizeRequests().antMatchers("/user/{username}/**")
-                .access("@guard.checkUsername(authentication, #username)")
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))

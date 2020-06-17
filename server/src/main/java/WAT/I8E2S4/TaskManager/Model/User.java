@@ -1,7 +1,5 @@
 package WAT.I8E2S4.TaskManager.Model;
 
-import WAT.I8E2S4.TaskManager.Model.Category;
-
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +7,6 @@ import java.util.Set;
 
 @Entity
 @NoArgsConstructor
-@Table(name="user")
 public class User{
 
     @Id

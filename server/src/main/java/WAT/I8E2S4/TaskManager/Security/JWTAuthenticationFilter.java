@@ -32,10 +32,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             User creds = new ObjectMapper().readValue(request.getInputStream(), User.class);
             if(creds.getUsername()==null){ throw new BadCredentialsException("Username is empty"); }
             if(creds.getPassword()==null){ throw new BadCredentialsException("Password is empty"); }
-            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    creds.getUsername(),
-                    creds.getPassword()
-            ));
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
+                    = new UsernamePasswordAuthenticationToken(creds.getUsername(),creds.getPassword());
+            return authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         }catch(IOException e){
             throw new RuntimeException(e);
         }
